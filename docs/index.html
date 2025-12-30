@@ -3,14 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hear Yourself - Free Audio Monitor for macOS</title>
-    <meta name="description" content="Free, low-latency audio monitor for macOS. Hear your microphone through your speakers in real-time.">
-    <meta property="og:title" content="Hear Yourself - Free Audio Monitor for macOS">
-    <meta property="og:description" content="Free, low-latency audio monitor for macOS. Hear your microphone through your speakers in real-time.">
-    <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>hear yourself</title>
+    <meta name="description" content="hear your microphone through your speakers. free, simple, low-latency.">
     <style>
         * {
             margin: 0;
@@ -19,226 +13,269 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-
-        .container {
-            max-width: 800px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.5;
+            padding: 60px 24px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 4px 20px rgba(100, 200, 255, 0.3));
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 600;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff 0%, #a8d8ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .tagline {
-            font-size: 1.4rem;
-            color: #a0b4c8;
+            font-size: 1.1rem;
+            color: #666;
             margin-bottom: 40px;
-            font-weight: 400;
         }
 
-        .download-btn {
+        .download-wrap {
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .download {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: #0a1628;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 30px rgba(79, 172, 254, 0.4);
+            font-size: 1rem;
+            transition: background 0.2s;
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 40px rgba(79, 172, 254, 0.6);
+        .download:hover {
+            background: #333;
         }
 
-        .download-btn svg {
-            width: 24px;
-            height: 24px;
+        .waveform {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .waveform span {
+            width: 3px;
+            background: #fff;
+            border-radius: 2px;
+            height: 4px;
+            transition: height 0.1s;
+        }
+
+        .download:hover .waveform span {
+            animation: wave 0.5s ease-in-out infinite;
+        }
+
+        .download:hover .waveform span:nth-child(1) { animation-delay: 0s; }
+        .download:hover .waveform span:nth-child(2) { animation-delay: 0.1s; }
+        .download:hover .waveform span:nth-child(3) { animation-delay: 0.2s; }
+        .download:hover .waveform span:nth-child(4) { animation-delay: 0.1s; }
+        .download:hover .waveform span:nth-child(5) { animation-delay: 0s; }
+
+        @keyframes wave {
+            0%, 100% { height: 4px; }
+            50% { height: 16px; }
         }
 
         .platform {
-            margin-top: 12px;
-            color: #6b7f94;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 60px;
         }
 
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-            text-align: left;
+            margin-bottom: 60px;
         }
 
         .feature {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
+            margin-bottom: 24px;
         }
 
-        .feature:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .feature h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #fff;
+        .feature h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
 
         .feature p {
-            color: #8899a8;
+            color: #666;
             font-size: 0.95rem;
-            line-height: 1.5;
         }
 
-        .why-section {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-            text-align: left;
+        .why {
+            border-top: 1px solid #eee;
+            padding-top: 40px;
+            margin-bottom: 60px;
         }
 
-        .why-section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: #fff;
+        .why h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
-        .why-section p {
-            color: #8899a8;
-            line-height: 1.7;
+        .why p {
+            color: #666;
+            font-size: 0.95rem;
         }
 
-        .footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #6b7f94;
+        footer {
+            border-top: 1px solid #eee;
+            padding-top: 40px;
             font-size: 0.9rem;
+            color: #999;
         }
 
-        .footer a {
-            color: #4facfe;
-            text-decoration: none;
+        footer a {
+            color: #666;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        /* Easter egg: piano keys */
+        .note {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.5s ease-out;
         }
 
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #8899a8;
-            text-decoration: none;
-            margin-top: 20px;
-            font-size: 0.95rem;
-            transition: color 0.2s;
+        .note.play {
+            opacity: 1;
+            animation: float 1s ease-out forwards;
         }
 
-        .github-link:hover {
-            color: #fff;
+        @keyframes float {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-60px); }
         }
 
-        .github-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        /* Subtle hint */
+        .hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.75rem;
+            color: #ddd;
+            transition: opacity 0.3s;
+        }
+
+        .hint:hover {
+            color: #999;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="icon">🎙</div>
-        <h1>Hear Yourself</h1>
-        <p class="tagline">Free, low-latency audio monitor for macOS</p>
+    <h1>hear yourself</h1>
+    <p class="tagline">hear your microphone through your speakers.<br>free, simple, low-latency.</p>
 
-        <a href="https://github.com/gabrycina/hear-yourself/releases/latest" class="download-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-            </svg>
-            Download for macOS
+    <div class="download-wrap">
+        <a href="https://github.com/gabrycina/hear-yourself/releases/latest/download/HearYourself-macOS.zip" class="download">
+            <span>download for macos</span>
+            <div class="waveform">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </a>
-        <p class="platform">Requires macOS 10.13 or later</p>
+    </div>
+    <p class="platform">requires macos 10.13+</p>
 
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Ultra Low Latency</h3>
-                <p>As low as ~1.3ms delay. Hear yourself in real-time without noticeable lag.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎯</div>
-                <h3>Simple & Clean</h3>
-                <p>Lives in your menu bar. One click to start, select devices, done.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔄</div>
-                <h3>Live Switching</h3>
-                <p>Change input and output devices on the fly without restarting.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💸</div>
-                <h3>100% Free</h3>
-                <p>No ads, no subscriptions, no tracking. Open source forever.</p>
-            </div>
+    <div class="features">
+        <div class="feature">
+            <h2>low latency</h2>
+            <p>~1.3ms delay. actually real-time.</p>
         </div>
-
-        <div class="why-section">
-            <h2>Why we built this</h2>
-            <p>
-                The popular tool LineIn was discontinued in 2017 and doesn't work on modern macOS.
-                The alternatives cost $50-120. We thought that was absurd for such a simple utility,
-                so we built a free one. Perfect for testing mics, monitoring yourself while recording
-                podcasts, streaming, or just practicing your karaoke skills.
-            </p>
+        <div class="feature">
+            <h2>menu bar app</h2>
+            <p>lives in your menu bar. click to start.</p>
         </div>
-
-        <a href="https://github.com/gabrycina/hear-yourself" class="github-link">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            View on GitHub
-        </a>
-
-        <div class="footer">
-            <p>Made with ♥ by <a href="https://github.com/gabrycina">Gabrycina</a> & Claude Opus</p>
+        <div class="feature">
+            <h2>free & open source</h2>
+            <p>no ads, no tracking, no subscriptions.</p>
         </div>
     </div>
+
+    <div class="why">
+        <h2>why</h2>
+        <p>the popular tool for this (LineIn) was discontinued in 2017. alternatives cost $50-120. we made a free one.</p>
+    </div>
+
+    <footer>
+        <p>made by <a href="https://github.com/gabrycina">gabrycina</a> & claude opus · <a href="https://github.com/gabrycina/hear-yourself">source</a></p>
+    </footer>
+
+    <div class="hint">try your keyboard</div>
+
+    <script>
+        // Easter egg: play notes with keyboard
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        const notes = {
+            'a': 261.63, // C4
+            's': 293.66, // D4
+            'd': 329.63, // E4
+            'f': 349.23, // F4
+            'g': 392.00, // G4
+            'h': 440.00, // A4
+            'j': 493.88, // B4
+            'k': 523.25, // C5
+            'l': 587.33, // D5
+        };
+
+        const noteSymbols = ['♪', '♫', '♬', '♩'];
+
+        function playNote(freq, key) {
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            oscillator.frequency.value = freq;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.8);
+
+            // Visual feedback
+            const note = document.createElement('div');
+            note.className = 'note';
+            note.textContent = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
+            note.style.left = (Math.random() * 80 + 10) + '%';
+            note.style.top = (Math.random() * 60 + 20) + '%';
+            document.body.appendChild(note);
+
+            requestAnimationFrame(() => note.classList.add('play'));
+            setTimeout(() => note.remove(), 1000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            if (notes[key] && !e.repeat) {
+                audioCtx.resume();
+                playNote(notes[key], key);
+            }
+        });
+
+        // Hide hint after first note
+        document.addEventListener('keydown', () => {
+            document.querySelector('.hint').style.opacity = '0';
+        }, { once: true });
+    </script>
 </body>
 </html>
